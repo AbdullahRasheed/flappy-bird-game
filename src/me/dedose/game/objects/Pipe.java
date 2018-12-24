@@ -19,7 +19,7 @@ public class Pipe extends GameObject {
         try {
             this.height = new Random().nextInt(700 + 1 - 100) + 200;
             this.handler = handler;
-            this.img = ImageIO.read(getClass().getResource("pipe_up.png"));
+            this.img = ImageIO.read(getClass().getResource("sprites/pipe_up.png"));
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -30,7 +30,7 @@ public class Pipe extends GameObject {
         try {
             this.height = height;
             this.handler = handler;
-            this.img = ImageIO.read(getClass().getResource("pipe_down.png"));
+            this.img = ImageIO.read(getClass().getResource("sprites/pipe_down.png"));
         }catch (Exception e){
             e.printStackTrace();
         }

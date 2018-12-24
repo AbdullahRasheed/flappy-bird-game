@@ -27,9 +27,9 @@ public class Player extends GameObject {
         this.tickHandler = tickHandler;
 
         try {
-            //use "chungus.png" nad "chungus_f.png" for a nice little meme ;)
-            fallingImg = ImageIO.read(getClass().getResource("bird_tilted.png"));
-            stillImg = ImageIO.read(getClass().getResource("bird.png"));
+            //use "sprites/chungus_f.png" and "sprites/chungus.png" for a nice little meme ;)
+            fallingImg = ImageIO.read(getClass().getResource("sprites/bird_tilted.png"));
+            stillImg = ImageIO.read(getClass().getResource("sprites/bird.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
