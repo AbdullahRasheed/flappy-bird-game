@@ -13,6 +13,8 @@ import me.dedose.game.render.Window;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main extends Canvas implements Runnable {
 
@@ -26,6 +28,7 @@ public class Main extends Canvas implements Runnable {
     private TickHandler tickHandler;
 
     private HUD hud;
+    private static List<Color> rainbowColors;
 
     public Main(){
         this.handler = new Handler();
@@ -37,6 +40,16 @@ public class Main extends Canvas implements Runnable {
         new Window(WIDTH, HEIGHT, "Flappy Bird", this);
 
         this.hud = new HUD();
+
+        // --- RAINBOW COLOR LIST INIT
+        rainbowColors = new ArrayList<>();
+        for (int r=0; r<100; r++) rainbowColors.add(new Color(r*255/100, 255, 0));
+        for (int g=100; g>0; g--) rainbowColors.add(new Color(255, g*255/100, 0));
+        for (int b=0; b<100; b++) rainbowColors.add(new Color(255, 0, b*255/100));
+        for (int r=100; r>0; r--) rainbowColors.add(new Color(r*255/100, 0, 255));
+        for (int g=0; g<100; g++) rainbowColors.add(new Color(0, g*255/100, 255));
+        for (int b=100; b>0; b--) rainbowColors.add(new Color(0, 255, b*255/100));
+        rainbowColors.add(new Color(0, 255, 0));
     }
 
     public void initObjects(){
@@ -95,6 +108,8 @@ public class Main extends Canvas implements Runnable {
         stop();
     }
 
+    private int currentColor = 0;
+    private int counter = 0;
     private void render(){
         BufferStrategy bs = this.getBufferStrategy();
         if(bs == null){
@@ -104,8 +119,18 @@ public class Main extends Canvas implements Runnable {
 
         Graphics g = bs.getDrawGraphics();
 
-        g.setColor(Color.white);
+        // --- RAINBOW BACKGROUND SETTER
+        if(counter == 100) {
+            if(currentColor == 600) currentColor = 0;
+            else currentColor++;
+            counter = 0;
+        }
+        g.setColor(rainbowColors.get(currentColor));
+        // ---
+
+        //g.setColor(Color.white);
         g.fillRect(0, 0, WIDTH, HEIGHT);
+        counter++;
 
         handler.render(g);
         hud.render(g);
