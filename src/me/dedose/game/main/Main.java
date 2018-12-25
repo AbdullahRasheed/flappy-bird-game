@@ -1,5 +1,6 @@
 package me.dedose.game.main;
 
+import me.dedose.game.ai.Network;
 import me.dedose.game.controls.KeyInput;
 import me.dedose.game.controls.TickHandler;
 import me.dedose.game.handlers.GameObject;
@@ -30,6 +31,8 @@ public class Main extends Canvas implements Runnable {
     private HUD hud;
     private static List<Color> rainbowColors;
 
+    private Network network;
+
     public Main(){
         this.handler = new Handler();
         this.tickHandler = new TickHandler();
@@ -50,6 +53,8 @@ public class Main extends Canvas implements Runnable {
         for (int g=0; g<100; g++) rainbowColors.add(new Color(0, g*255/100, 255));
         for (int b=100; b>0; b--) rainbowColors.add(new Color(0, 255, b*255/100));
         rainbowColors.add(new Color(0, 255, 0));
+
+        //network = new Network(4, 1, 3, 4);
     }
 
     public void initObjects(){
@@ -120,7 +125,7 @@ public class Main extends Canvas implements Runnable {
         Graphics g = bs.getDrawGraphics();
 
         // --- RAINBOW BACKGROUND SETTER
-        if(counter == 100) {
+        if(counter == 50) {
             if(currentColor == 600) currentColor = 0;
             else currentColor++;
             counter = 0;
@@ -147,6 +152,7 @@ public class Main extends Canvas implements Runnable {
         handler.removePush.clear();
         tickHandler.tick();
         HUD.updatePipes(handler);
+
     }
 
     public static void main(String[] args){
