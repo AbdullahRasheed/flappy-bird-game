@@ -45,14 +45,14 @@ public class Main extends Canvas implements Runnable {
         this.hud = new HUD();
 
         // --- RAINBOW COLOR LIST INIT
-        rainbowColors = new ArrayList<>();
+        /*rainbowColors = new ArrayList<>();
         for (int r=0; r<100; r++) rainbowColors.add(new Color(r*255/100, 255, 0));
         for (int g=100; g>0; g--) rainbowColors.add(new Color(255, g*255/100, 0));
         for (int b=0; b<100; b++) rainbowColors.add(new Color(255, 0, b*255/100));
         for (int r=100; r>0; r--) rainbowColors.add(new Color(r*255/100, 0, 255));
         for (int g=0; g<100; g++) rainbowColors.add(new Color(0, g*255/100, 255));
         for (int b=100; b>0; b--) rainbowColors.add(new Color(0, 255, b*255/100));
-        rainbowColors.add(new Color(0, 255, 0));
+        rainbowColors.add(new Color(0, 255, 0));*/
 
         //network = new Network(4, 1, 3, 4);
     }
@@ -125,15 +125,15 @@ public class Main extends Canvas implements Runnable {
         Graphics g = bs.getDrawGraphics();
 
         // --- RAINBOW BACKGROUND SETTER
-        if(counter == 50) {
+        /*if(counter == 50) {
             if(currentColor == 600) currentColor = 0;
             else currentColor++;
             counter = 0;
         }
-        g.setColor(rainbowColors.get(currentColor));
+        g.setColor(rainbowColors.get(currentColor));*/
         // ---
 
-        //g.setColor(Color.white);
+        g.setColor(Color.white);
         g.fillRect(0, 0, WIDTH, HEIGHT);
         counter++;
 
@@ -152,7 +152,6 @@ public class Main extends Canvas implements Runnable {
         handler.removePush.clear();
         tickHandler.tick();
         HUD.updatePipes(handler);
-
     }
 
     public static void main(String[] args){

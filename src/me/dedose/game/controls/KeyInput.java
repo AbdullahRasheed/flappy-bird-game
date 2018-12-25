@@ -21,6 +21,8 @@ public class KeyInput extends KeyAdapter {
     }
 
     public void keyPressed(KeyEvent e) {
+        if(Main.currentStatus) return;
+
         int key = e.getKeyCode();
         if(key == KeyEvent.VK_SPACE){
             for (GameObject gameObject : handler.object) {

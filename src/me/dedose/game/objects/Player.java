@@ -6,6 +6,7 @@ import me.dedose.game.handlers.Handler;
 import me.dedose.game.handlers.ID;
 import me.dedose.game.main.Main;
 import me.dedose.game.mechanics.Tick;
+import me.dedose.game.render.HUD;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -48,7 +49,15 @@ public class Player extends GameObject {
                     y += gravity;
                     gravity += weight;
                     Player.falling = true;
-                    if(y >= Main.HEIGHT - 70) y = Main.HEIGHT - 70;
+                    if(y >= Main.HEIGHT - 70) {
+                        y = Main.HEIGHT - 70;
+                        handler.object.clear();
+                        tickHandler.clear();
+                        Main.currentStatus = false;
+                        HUD.counter = 1;
+                        Main.score = 0;
+                        initObjects();
+                    }
                 }
             });
         }
@@ -91,5 +100,19 @@ public class Player extends GameObject {
     @Override
     public Rectangle getBounds() {
         return new Rectangle(x, y, 32, 32);
+    }
+
+    public void initObjects(){
+        Pipe pipe = new Pipe(Main.WIDTH + 50, 100, ID.Pipe, handler);
+        pipe.setY(Main.HEIGHT - pipe.height);
+        handler.addObject(pipe);
+
+        int p2Height = Main.HEIGHT - (pipe.height + 250);
+        Pipe pipe2 = new Pipe(Main.WIDTH + 50, 100, ID.Pipe, p2Height, handler);
+        pipe2.setY(pipe2.height - Main.HEIGHT);
+        handler.addObject(pipe2);
+
+        handler.addObject(new Player(300, 100, ID.Player, handler, tickHandler));
+        handler.addObject(new Floor(0, Main.HEIGHT - 20, ID.Floor));
     }
 }

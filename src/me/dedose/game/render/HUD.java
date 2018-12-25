@@ -24,7 +24,7 @@ public class HUD {
         g.drawString("DEDOSE INC. COPYRIGHT", Main.WIDTH/2 - 700, Main.HEIGHT/2);*/
     }
 
-    private static long counter = 1;
+    public static long counter = 1;
     public static void updatePipes(Handler handler){
         if(counter % 200 == 0){
             Pipe pipe = new Pipe(Main.WIDTH + 50, 100, ID.Pipe, handler);
@@ -37,6 +37,6 @@ public class HUD {
             pipe2.setY(pipe2.height - Main.HEIGHT);
             handler.addObject(pipe2);
         }
-        counter++;
+        if(!Main.currentStatus) counter++;
     }
 }
